@@ -7,11 +7,47 @@
 		<meta charset="utf-8" />
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<style>
+			.square {
+				width: 100px;
+				height: 100px;
+				margin: 10px 5px 10px 5px;
+				float: left;
+				border: 4px black solid;
+			}
+
+			.squares {
+				position: relative;
+				left: 5px;
+			}
+
+			.blue {
+				background-color: blue;
+			}
+
+			.red {
+				background-color: red;
+			}
+
+			.green {
+				background-color: green;
+				border-radius: 50px;
+			}
+
+			body {
+				margin:0;
+				padding:0;
+			}
+		</style>
 	</head>
 
 	<body>
-		<p>Test</p>
+		<div class="squares">
+			<div class="red square"></div>
+			<div class="blue square"></div>
+			<div class="green square"></div>
+		</div>
 	</body>
-
 
 </html>
