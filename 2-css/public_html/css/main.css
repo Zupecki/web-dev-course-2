@@ -1,0 +1,38 @@
+.square {
+	width: 100px;
+	height: 100px;
+	margin: 10px 5px 10px 5px;
+	float: left;
+	border: 4px black solid;
+}
+
+.squares {
+	position: relative;
+	left: 5px;
+}
+
+.blue {
+	background-color: blue;
+}
+
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: green;
+	border-radius: 50px;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+body {
+	margin:0;
+	padding:0;
+}
