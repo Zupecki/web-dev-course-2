@@ -1,29 +1,22 @@
-.square {
-	width: 100px;
-	height: 100px;
-	margin: 10px 5px 10px 5px;
-	float: left;
-	border: 4px black solid;
+#navbar {
+	height: 75px;
+	width: 100%;
+	background: linear-gradient(to right, #8F2B88, #FE0052);
 }
 
-.squares {
+#navbar img {
 	position: relative;
-	left: 5px;
+	top: 5px;
+	left: -2px;
+	margin: 0px 15px;
 }
 
-.blue {
-	background-color: blue;
+#left-column {
+	height: 2000px;
+	width: 70%;
 }
 
-.red {
-	background-color: red;
-}
-
-.green {
-	background-color: green;
-	border-radius: 50px;
-}
-
+/*
 a:link {
 	text-decoration: none;
 }
@@ -31,7 +24,7 @@ a:link {
 a:hover {
 	text-decoration: underline;
 }
-
+*/
 body {
 	margin:0;
 	padding:0;
