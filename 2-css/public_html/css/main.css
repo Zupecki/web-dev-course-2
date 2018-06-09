@@ -1,18 +1,52 @@
-#navbar {
+#headbar {
 	height: 75px;
 	width: 100%;
 	background: linear-gradient(to right, #8F2B88, #FE0052);
+	float: left;
+	position: relative;
 }
 
-#navbar img {
-	position: relative;
-	top: 5px;
-	left: -1px;
+#headbar img {
+	margin: 5px 0px;
+	float: left;
 }
 
 #left-column {
 	height: 2000px;
 	width: 70%;
+}
+
+#navbar {
+	height: 100%;
+	position: relative;
+	left: 32px;
+}
+
+#navbar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	top: 15px;
+	height: 100%;
+}
+
+#navbar ul li {
+	display: inline;
+	float: left;
+	margin: 12px;
+}
+
+#navbar a {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	text-decoration: none;
+	color: white;
+	letter-spacing: -0.4px;
+}
+
+#navbar a:hover {
+	color: #32283C;
 }
 
 /*
