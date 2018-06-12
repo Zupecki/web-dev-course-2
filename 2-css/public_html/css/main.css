@@ -50,12 +50,18 @@
 
 #social {
 	float: right;
+	position: relative;
+	right: 9px;
 	width: 228px;
 }
 
+#social ul li {
+	margin: 0px 8px;
+}
+
 .social-img-container {
-	width: 16px;
-	height: 16px;
+	width: 17px;
+	height: 17px;
 }
 
 .icon-social {
@@ -75,13 +81,64 @@
 
 .social-default {
 	position: relative;
-	top: -19px;
+	top: -120%;
 	z-index: 9;
+}
+
+.social-default:hover {
+	opacity: 0;
 }
 
 #login {
 	float: right;
 	width: 48px;
+}
+
+#subscribe-container {
+	height: 30px;
+	width: 102px;
+	padding: 2px;
+	box-sizing: border-box;
+	border-style: solid;
+	border-color: white;
+	border-width: 1px;
+	position: relative;
+	left: 4px;
+}
+
+#subscribe-container p {
+	font-size: 8pt !important;
+	letter-spacing: 0.5px !important;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	margin: 0;
+}
+
+#subscribe-img-container {
+	width: 14px;
+	height: 14px;
+	float: left;
+	position: relative;
+	top: 50%;
+	margin: 0 5px;
+	transform: translateY(-50%);
+}
+
+#subscribe-container:hover {
+	border-color: #32283C;
+}
+
+#subscribe-container:hover p {
+	color: #32283C;
+}
+
+#subscribe-container:hover #subscribe-default {
+	opacity: 0;
+}
+
+#subscribe-container:hover #subscribe-hover {
+	opacity: 1;
 }
 
 .menu-item-style a {
@@ -124,6 +181,11 @@ a:hover {
 	text-decoration: underline;
 }
 */
+
+p {
+
+}
+
 body {
 	margin:0;
 	padding:0;
