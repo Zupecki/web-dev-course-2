@@ -4,7 +4,7 @@
 	background: linear-gradient(to right, #8F2B88, #FE0052);
 }
 
-#headbar img {
+#logo-polygon {
 	position: relative;
 	top: 5px;
 	float: left;
@@ -51,7 +51,32 @@
 #social {
 	float: right;
 	width: 228px;
+}
+
+.social-img-container {
+	width: 16px;
+	height: 16px;
+}
+
+.icon-social {
 	height: 100%;
+	width: 100%;
+}
+
+.social-hover {
+	position: relative;
+	z-index: 10;
+	opacity: 0;
+}
+
+.social-hover:hover {
+	opacity: 1;
+}
+
+.social-default {
+	position: relative;
+	top: -19px;
+	z-index: 9;
 }
 
 #login {
@@ -68,20 +93,24 @@
 	list-style-type: none;
 }
 
-.nav-ul ul {
+.nav {
+	height: 100%;
+}
+
+.nav ul {
 	margin: 0;
 	padding: 0;
 	height: 100%;
 }
 
-.nav-li ul li {
+.nav ul li {
 	display: table;
 	float: left;
 	margin: 0px 12px;
 	height: 100%;
 }
 
-.nav-a a {
+.nav a {
 	vertical-align: middle;
 	display: table-cell;
 }
