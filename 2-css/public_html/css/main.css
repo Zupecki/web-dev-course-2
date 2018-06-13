@@ -18,7 +18,7 @@
 #navbar {
 	height: 100%;
 	float: left;
-	margin: 0px 15px 0px 30px;
+	margin: -1px 15px 0px 30px;
 }
 
 #navbar ul {
@@ -30,13 +30,13 @@
 #navbar ul li {
 	display: table;
 	float: left;
-	margin: 0px 12px;
 	height: 100%;
 }
 
 #navbar a {
 	vertical-align: middle;
 	display: table-cell;
+	padding: 12px;
 }
 
 #navbar a:hover {
@@ -75,6 +75,10 @@
 	opacity: 0;
 }
 
+.social-hover:hover .social-default {
+	opacity: 0;
+}
+
 .social-hover:hover {
 	opacity: 1;
 }
@@ -85,9 +89,11 @@
 	z-index: 9;
 }
 
+/*
 .social-default:hover {
 	opacity: 0;
 }
+*/
 
 #login {
 	float: right;
