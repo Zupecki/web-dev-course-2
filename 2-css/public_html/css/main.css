@@ -84,11 +84,7 @@
 	top: -126%;
 	z-index: 9;
 }
-/*
-.social-default:hover {
-	opacity: 0;
-}
-*/
+
 .social-overlay:hover {
 	opacity: 1;
 }
