@@ -2,6 +2,7 @@
 	height: 75px;
 	width: 100%;
 	background: linear-gradient(to right, #8F2B88, #FE0052);
+	margin: 0 0 2px 0;
 }
 
 #logo-polygon {
@@ -181,6 +182,43 @@
 .nav a {
 	vertical-align: middle;
 	display: table-cell;
+}
+
+#left-column {
+	width: 1097px;
+	height: 3000px;
+	float: left;
+	margin: 2px 2px 2px 4px;
+}
+
+#headline-left {
+	width: 100%;
+	height: 366px;
+	background-color: blue;
+	float: left;
+	text-align: center;
+}
+
+#right-column {
+	width: 363px;
+	height: 3000px;
+	float: left;
+	margin: 2px 4px 2px 2px;
+}
+
+#headline-right {
+	width: 100%;
+	height: 366px;
+	background-color: red;
+	float: left;
+	text-align: center;
+}
+
+.article p{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	color: white;
 }
 
 /*
