@@ -185,7 +185,7 @@
 }
 
 #left-column {
-	width: 1097px;
+	width: 69%;
 	height: 3000px;
 	float: left;
 	margin: 2px 2px 2px 4px;
@@ -194,13 +194,13 @@
 #headline-left {
 	width: 100%;
 	height: 366px;
-	background-color: blue;
+	/*background-color: blue;*/
 	float: left;
 	text-align: center;
 }
 
 #right-column {
-	width: 363px;
+	width: 30%;
 	height: 3000px;
 	float: left;
 	margin: 2px 4px 2px 2px;
@@ -209,18 +209,70 @@
 #headline-right {
 	width: 100%;
 	height: 366px;
-	background-color: red;
 	float: left;
 	text-align: center;
 }
 
-.article p{
+.article {
+	overflow: hidden;
 	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+	
+}
+
+.article-info-box {
+	position: absolute;
+	width: 90%;
+	bottom: 16px;
+	left: 16px;
+
+}
+
+.article-info-box-type {
+	background-color: #FF0052;
+	width: 50px;
+	padding: 2px 4px;
+}
+
+.article-info-box-type p {
+	margin: 0;
+	font-family: arial;
+	font-size: 8pt;
+	font-weight: bold;
+}
+
+.article-info-box h1 {
+	position: relative;
+	margin: 5px 0;
+	text-align: left;
+}
+
+.article-info-box p {
+	position: relative;
+	margin: 5px 0;
+	text-align: left;
+}
+
+.article-headline-text {
+	font-family: arial;
+}
+
+.left-header {
 	color: white;
 }
 
+.right-header {
+	color: black;
+	font-weight: bold;
+}
+
+.minor-article-img {
+	overflow: hidden;
+	height: 80%;
+}
+
+.minor-article-headline-box {
+	height: 20%;
+}
 /*
 a:link {
 	text-decoration: none;
