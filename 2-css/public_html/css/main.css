@@ -189,11 +189,16 @@
 	height: 3000px;
 }
 
+.content-row {
+	height: 366px;
+	margin: 4px;
+}
+
 #left-column {
 	flex-basis: calc(75% - 2px * 2);
 	height: 100%;
 	float: left;
-	margin: 2px 2px 2px 4px;
+	margin: 0 2px 0 0;
 }
 
 #headline-left {
@@ -204,8 +209,8 @@
 #right-column {
 	flex-basis: calc(25% - 2px * 2);
 	height: 100%;
-	float: right;
-	margin: 2px 4px 2px 2px;
+	float: left;
+	margin: 0 0 0 2px;
 }
 
 #headline-right {
@@ -216,7 +221,6 @@
 .article {
 	overflow: hidden;
 	position: relative;
-	
 }
 
 .article-info-box {
