@@ -298,6 +298,12 @@
 	display: table-cell;
 }
 
+#footer-logo p {
+	color: white;
+	margin: 0;
+	padding: 0;
+}
+
 #footer-links {
 	width: 625px;
 	height: 200px;
