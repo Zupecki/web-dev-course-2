@@ -285,7 +285,7 @@
 	width: 1100px;
 	height: 100%;
 	padding: 16px 0;
-	background-color: red;
+	/*background-color: red;*/
 	margin: 0 auto;
 	display: table;
 	text-align: center;
@@ -294,14 +294,23 @@
 #footer-logo {
 	width: 200px;
 	height: 200px;
-	background-color: black;
+	/*background-color: black;*/
+	display: table;
+	float: left;
+}
+
+.centered-container {
 	display: table-cell;
+	vertical-align: middle;
 }
 
 #footer-logo p {
 	color: white;
-	margin: 0;
+	margin: auto;
 	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 28pt;
+	font-weight: bold;
 }
 
 #footer-links {
