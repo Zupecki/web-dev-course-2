@@ -282,9 +282,8 @@
 }
 
 #footer-wrapper {
-	width: 1100px;
-	height: 100%;
 	padding: 16px 0;
+	width: 1100px;
 	/*background-color: red;*/
 	margin: 0 auto;
 	display: table;
@@ -292,11 +291,10 @@
 }
 
 #footer-logo {
-	width: 200px;
-	height: 200px;
 	/*background-color: black;*/
-	display: table;
-	float: left;
+	width: 200px;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .centered-container {
@@ -315,7 +313,6 @@
 
 #footer-links {
 	width: 625px;
-	height: 200px;
 	padding: 8px 16px;
 	display: table-cell;
 	text-align: left;
@@ -325,7 +322,6 @@
 
 #vox-media {
 	width: 275px;
-	height: 200px;
 	background-color: orange;
 }
 
