@@ -1,0 +1,106 @@
+<html>
+
+	<head>
+
+		<title>Javascript</title>
+
+	</head>
+
+	<body>
+
+		<p id="text-1">Hello World!</p>
+        <form>
+            Select Color:
+            <select id="colors">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+            </select>
+        </form>
+        <button id="button-1">Toggle Color</button>
+
+        <hr>
+
+        <p id="text-2">Javascript is ...</p>
+        <button id="button-2">Append Text</button>
+
+        <hr>
+
+        <p id="text-3">Replace text with something</p>
+        <input id="input-3" type="text">
+        <button id="button-3">Replace Text</button>
+
+        <hr>
+
+        <p id="text-4">How many fingers am I holding up?</p>
+        <input id="input-4" type="text">
+        <button id="button-4">Guess!</button>
+
+		<script type="text/javascript">
+			
+            document.getElementById("button-1").onclick = function(){
+                var text1 = document.getElementById("text-1");
+                var colorOptions = document.getElementById("colors");
+                var currentColor = colorOptions.options[colorOptions.selectedIndex].value;
+                flip_color(text1, currentColor);
+                //alert_box("Changed text color!")
+            };
+
+            document.getElementById("button-2").onclick = function(){
+                var text2 = document.getElementById("text-2");
+                append_to_innerHTML(text2, "cool!")
+            };
+
+            document.getElementById("button-3").onclick = function(){
+                var text3 = document.getElementById("text-3");
+                var replacement = document.getElementById("input-3");
+                replace_innerHTML(text3, replacement);
+            };
+
+            document.getElementById("button-4").onclick = function(){
+                var guess = document.getElementById("input-4").value;
+                guess_fingers(guess);
+            };
+
+            function flip_color(element, color){
+                if(element.style.color == color){
+                    element.style.color = 'black';
+                }
+                else {
+                    element.style.color = color;
+                }
+            };
+
+            function alert_box(message){
+                alert(message);
+            };
+
+            function append_to_innerHTML(element, append){
+                element.innerHTML = element.innerHTML.slice(0, -3) + append;
+            };
+
+            function replace_innerHTML(element, replacement){
+                element.innerHTML = replacement.value;
+            };
+
+            function random_number(min, max){
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            function guess_fingers(guess){
+                let fingers = random_number(0, 10);
+
+                if(guess == fingers){
+                    alert("Good guess, you got lucky!");
+                }
+                else{
+                    alert('Sorry, I actually had '+ String(fingers)+' fingers up. Try again!')
+                }
+            };
+
+
+		</script>
+
+	</body>
+
+</html>
