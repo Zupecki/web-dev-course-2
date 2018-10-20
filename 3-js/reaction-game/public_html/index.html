@@ -1,0 +1,87 @@
+<html>
+
+	<head>
+
+		<title>JS Game - Test Your Reactions!</title>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="stylesheet" href="css/main.css">
+
+	</head>
+
+	<body>
+
+        <div class="game-wrapper">
+    		<div>
+    			<h1 class="typeface-arial">Test Your Reactions!</h1>
+                <p class="typeface-arial">Click on the boxes, or circles, as quickly as you can!</p>
+                <p class="bold typeface-arial" id="your-time">Your time: </p>
+    		</div>
+
+            <div class="canvas">
+                <div class="shape" id="interactive-shape"></div>
+            </div>
+        </div>
+		
+		<script type="text/javascript">
+            //Start timer on page load - get current time on page load, get time when click happens, subtract
+            var timeStart = new Date().getTime();
+            var timeClick = 0.0;
+
+/*            (function(){
+                timeStart = new Date().getTime()
+                console.log("TIMER:" + timer)
+            })();
+*/		
+            document.getElementById("interactive-shape").onclick = function(){
+                var shape = document.getElementById("interactive-shape");
+                var currentColor = shape.style.color;
+                flip_color(shape, 'blue');
+
+                timeClick = new Date().getTime();
+                var timer = calculate_time(timeStart, timeClick).toFixed(4);
+
+                console.log("TIMER: "+ timer)
+
+                var timeText = document.getElementById("your-time");
+
+                append_to_innerHTML(timeText, timer);
+
+                timeStart = new Date().getTime();
+                //alert_box("Changed text color!")
+            };
+
+            function flip_color(element, color){
+                if(element.style.backgroundColor == color){
+                    element.style.backgroundColor = 'black';
+                }
+                else {
+                    element.style.backgroundColor = color;
+                }
+            };
+
+            function alert_box(message){
+                alert(message);
+            };
+
+            function append_to_innerHTML(element, append){
+                element.innerHTML = "Your time: " + append;
+            };
+
+            function random_number(min, max){
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            };
+
+            function calculate_time(startTime, timeClick){
+                console.log((timeClick-startTime)/1000)
+                return (timeClick - startTime)/1000;
+            };
+
+		</script>
+
+	</body>
+
+</html>

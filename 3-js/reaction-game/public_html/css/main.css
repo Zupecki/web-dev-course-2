@@ -1,0 +1,28 @@
+.game-wrapper {
+	margin: auto;
+	width: 700px;
+	height: 700px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.shape {
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	background-color: red;
+	position: relative;
+}
+
+.canvas {
+	height: 100%;
+	width: 100%;
+	background-color:black;
+}
+
+.typeface-arial {
+	font-family: arial;
+}
+
