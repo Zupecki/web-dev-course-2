@@ -37,21 +37,25 @@
             })();
 */		
             document.getElementById("interactive-shape").onclick = function(){
+                // Get page elements
+                var timeText = document.getElementById("your-time");
                 var shape = document.getElementById("interactive-shape");
                 var currentColor = shape.style.color;
+
+                // Test color change on click
                 flip_color(shape, 'blue');
 
+                // Get time at click
                 timeClick = new Date().getTime();
+                // Calculate the difference in time from page load
                 var timer = calculate_time(timeStart, timeClick).toFixed(4);
-
                 console.log("TIMER: "+ timer)
 
-                var timeText = document.getElementById("your-time");
-
+                // Add time taken to timeText element
                 append_to_innerHTML(timeText, timer);
 
+                // Reset the start time
                 timeStart = new Date().getTime();
-                //alert_box("Changed text color!")
             };
 
             function flip_color(element, color){
@@ -76,8 +80,9 @@
             };
 
             function calculate_time(startTime, timeClick){
-                console.log((timeClick-startTime)/1000)
-                return (timeClick - startTime)/1000;
+                let ms = 1000;
+                console.log((timeClick - startTime)/ms);
+                return ((timeClick - startTime)/ms);
             };
 
 		</script>
