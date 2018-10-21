@@ -15,6 +15,7 @@
             this.dimension = dimension;
             this.position = {x : position[0], y : position[1]};
             this.shapeType = shapeType;
+            this.identifier = "clickable-shape"
         }
 
         drawShape () {
@@ -29,7 +30,7 @@
                 cxt.fillRect(this.position.x, this.position.y, this.dimension, this.dimension);
             }   
         }
-    }
+    };
 
     window.onload = function() {
         gameWrapper = document.getElementById("game-wrapper");
@@ -39,30 +40,54 @@
         canvas.height = 700;
 
         cxt = canvas.getContext('2d');
-        shape = create_shape();
-        shape2 = create_shape();
-
-        //setInterval(updateShape(shape), 1000/30);
-
         cxt.fillStyle = "black";
         cxt.fillRect(0, 0, canvas.width, canvas.height);
 
-        //cxt.rect(20,20,150,100);
-        //cxt.stroke();
+        shape = create_shape();
 
-        updateShape(shape, shape2);
+        //setInterval(updateShape(shape), 1000/30);
 
-        console.log(shape);
+        updateShape(shape);
+
+        addEventListener(canvas, shape);
+
+        // Check if shape clicked
+    };
+
+    function addEventListener(canvas, shape){
+        canvas.addEventListener('click', (e) => {
+            const clickPos = {
+                x : e.clientX - canvas.offsetLeft,
+                y : e.clientY - canvas.offsetTop
+            };
+            console.log("X: " + clickPos['x'] + "\nY: " + clickPos['y']);
+            shapeHit(shape, clickPos);
+        });
+    };
+
+    function shapeHit(shape, clickPos){
+        hit = false;
+
+        if(shape.shapeType == "circle") {
+            hit = Math.sqrt((clickPos['x'] - shape.position['x'])**2 + (clickPos['y'] - shape.position['y']) **2) < shape.dimension/2;
+        }
+        else {
+            hit = (shape.position['x'] <= clickPos['x'] && clickPos['x'] <= shape.position['x'] + shape.dimension) &&
+            (shape.position['y'] <= clickPos['y'] && clickPos['y'] <= shape.position['y'] + shape.dimension);
+        }
+
+        if(hit == true){
+            console.log(shape.shapeType + " hit!");
+        };
         
-    }
+        return hit  
+    };
 
-    function updateShape(shape, shape2) {
-        //cxt.fillStyle = "blue";
-        //cxt.fillRect(0, 0, canvas.width, canvas.height);
-        shape2.drawShape();
-        shape.drawShape();   
-    }
-
+    function updateShape(shape) {
+        shape.drawShape();
+        console.log(shape);   
+    };
+/*
     document.getElementById("interactive-shape").onclick = function(){
         // Get page elements
         var timeText = document.getElementById("your-time");
@@ -84,7 +109,7 @@
         // Reset the start time
         timeStart = new Date().getTime();
     };
-
+*/
     function flip_color(element, color){
         if(element.style.backgroundColor == color){
             element.style.backgroundColor = 'black';
@@ -108,30 +133,28 @@
 
     function create_shape() {
         let colour = getRandomColour();
-        var dimension = random_number(60, canvas.width/3);
+        let dimension = random_number(60, canvas.width/3);
         let shapeType = ""
+        // 2 is for px, ensuring at least a margin of 2px on canvas for shapes
+        let posMin = 2;
+        let posMax = canvas.width - 2;
 
         // randomize circle or square based on even or odd number 
         if(random_number(1, 10)%2 == 0){
             shapeType = "circle";
-            console.log("DIMENSION: "+dimension/2);
-            console.log("1/3rd CANVAS WIDTH: "+canvas.width/3);
-            /*
-            if(dimension*2 > canvas.width/3){
-                dimension = canvas.width/3;
-                console.log("EDIT DIMENSION")
-            }
-            */
-            //dimension = dimension/2;
+            // edit posMin/posMax to ensure circle is pushed/pulled into canvas by its radius
+            posMin += dimension/2;
+            posMax -= dimension/2;
         }
         else {
             shapeType = "square";
+            // edit max pos to pull shape back in by width/height
+            posMax -= dimension;
         }
 
-        console.log("DIMENSION IS NOW: "+dimension);
-        //randomise x and y position
-        x = random_number(2, canvas.width - (dimension - 2));
-        y = random_number(2, canvas.width - (dimension - 2));
+        // get random position values for shape
+        x = random_number(posMin, posMax);
+        y = random_number(posMin, posMax);
 
         return new Shape(colour, dimension, [x, y], shapeType);
     };
@@ -150,4 +173,4 @@
             color += (sub.length == 1 ? "0" + sub : sub);
         }
         return "#" + color;
-    }
+    };

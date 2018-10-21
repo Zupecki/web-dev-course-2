@@ -1,25 +1,15 @@
-#game-wrapper {
+#game-title-block {
 	margin: auto;
 	width: 700px;
-	height: 700px;
 }
 
 .bold {
 	font-weight: bold;
 }
 
-.shape {
-	height: 100px;
-	width: 100px;
-	border-radius: 50%;
-	background-color: red;
-	position: relative;
-}
-
-.canvas {
-	height: 100%;
-	width: 100%;
-	background-color:black;
+#canvas {
+	display:block;
+	margin:auto;
 }
 
 .typeface-arial {
