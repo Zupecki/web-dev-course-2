@@ -28,7 +28,7 @@
             else{
                 cxt.fillStyle = this.colour;
                 cxt.fillRect(this.position.x, this.position.y, this.dimension, this.dimension);
-            }   
+            }
         }
     };
 
@@ -47,11 +47,10 @@
 
         //setInterval(updateShape(shape), 1000/30);
 
-        updateShape(shape);
+        shape.drawShape();
+        console.log(shape)
 
         addEventListener(canvas, shape);
-
-        // Check if shape clicked
     };
 
     function addEventListener(canvas, shape){
@@ -60,13 +59,14 @@
                 x : e.clientX - canvas.offsetLeft,
                 y : e.clientY - canvas.offsetTop
             };
-            console.log("X: " + clickPos['x'] + "\nY: " + clickPos['y']);
+            
             shapeHit(shape, clickPos);
         });
     };
 
     function shapeHit(shape, clickPos){
         hit = false;
+        console.log("X: " + clickPos['x'] + "\nY: " + clickPos['y']);
 
         if(shape.shapeType == "circle") {
             hit = Math.sqrt((clickPos['x'] - shape.position['x'])**2 + (clickPos['y'] - shape.position['y']) **2) < shape.dimension/2;
@@ -83,9 +83,9 @@
         return hit  
     };
 
-    function updateShape(shape) {
-        shape.drawShape();
-        console.log(shape);   
+    function updateTime(element) {
+        //shape.drawShape();
+        //console.log(shape);   
     };
 /*
     document.getElementById("interactive-shape").onclick = function(){
