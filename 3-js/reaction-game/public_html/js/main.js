@@ -1,9 +1,10 @@
 // create global canvas and cxt
-    var canvas, cxt;
+    var canvas, cxt, shape;
     var timeText = "";
     var timeClick = 0.0;
     var timeTaken = 0.0;
     var timeStart = new Date().getTime();
+    var shapeList = [];
     var timeRecords = [];
 
     class Shape {
@@ -41,9 +42,7 @@
         cxt.fillStyle = "black";
         cxt.fillRect(0, 0, canvas.width, canvas.height);
 
-        let shape = create_shape();
-        shape.drawShape();
-        console.log(shape)
+        create_shape();
 
         addEventListener(canvas, shape);
 
@@ -57,13 +56,14 @@
                 x : e.clientX - canvas.offsetLeft,
                 y : e.clientY - canvas.offsetTop
             };
-            shapeHit(shape, clickPos, timeStart);
+            shapeHit(clickPos, timeStart);
         });
     };
 
-    function shapeHit(shape, clickPos){
+    function shapeHit(clickPos){
         hit = false;
         console.log("X: " + clickPos['x'] + "\nY: " + clickPos['y']);
+        shape = shapeList[0];
 
         if(shape.shapeType == "circle") {
             hit = Math.sqrt((clickPos['x'] - shape.position['x'])**2 + (clickPos['y'] - shape.position['y']) **2) < shape.dimension/2;
@@ -75,6 +75,7 @@
 
         if(hit == true){
             resetAndSaveTime();
+            newShape();
             console.log(shape.shapeType + " hit!");
         };
         
@@ -83,8 +84,14 @@
 
     function updateTime(element) {
         var currentTime = new Date().getTime();
-        timer = calculate_time(timeStart, currentTime);
 
+        for(var i = 0; i < shapeList.length; i++) {
+            shapeList[i].drawShape()
+        }
+        //shape = create_shape();
+        //shape.drawShape();
+
+        timer = calculate_time(timeStart, currentTime);
         append_to_innerHTML(element, timer);
     };
 /*
@@ -110,6 +117,18 @@
         timeStart = new Date().getTime();
     };
 */
+
+    function newShape() {
+        cxt = canvas.getContext('2d');
+        cxt.fillStyle = 'black';
+        cxt.fillRect(0, 0, canvas.width, canvas.height);
+
+        //remove other shape
+        shapeList.splice(0,1);
+        
+        //create and add new shape
+        create_shape();
+    }
 
     // TODO - Have timeRecords trim to best 3
     function resetAndSaveTime() {
@@ -165,7 +184,7 @@
         x = random_number(posMin, posMax);
         y = random_number(posMin, posMax);
 
-        return new Shape(colour, dimension, [x, y], shapeType);
+        shapeList.push(new Shape(colour, dimension, [x, y], shapeType));
     };
 
     function calculate_time(startTime, timeClick){
