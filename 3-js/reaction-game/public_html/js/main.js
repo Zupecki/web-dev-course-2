@@ -1,13 +1,10 @@
-//Start timer on page load - get current time on page load, get time when click happens, subtract
-    var timeStart = new Date().getTime();
-    var timeClick = 0.0;
+// create global canvas and cxt
     var canvas, cxt;
-
-/*  (function(){
-            timeStart = new Date().getTime()
-            console.log("TIMER:" + timer)
-    })();
-*/		
+    var timeText = "";
+    var timeClick = 0.0;
+    var timeTaken = 0.0;
+    var timeStart = new Date().getTime();
+    var timeRecords = [];
 
     class Shape {
         constructor(colour, dimension, position, shapeType) {
@@ -33,7 +30,8 @@
     };
 
     window.onload = function() {
-        gameWrapper = document.getElementById("game-wrapper");
+        let gameWrapper = document.getElementById("game-wrapper");
+        let timeText = document.getElementById("your-time");
 
         canvas = document.getElementById("canvas");
         canvas.width = 700;
@@ -43,14 +41,14 @@
         cxt.fillStyle = "black";
         cxt.fillRect(0, 0, canvas.width, canvas.height);
 
-        shape = create_shape();
-
-        //setInterval(updateShape(shape), 1000/30);
-
+        let shape = create_shape();
         shape.drawShape();
         console.log(shape)
 
         addEventListener(canvas, shape);
+
+        var fps = 30;
+        setInterval(function() { updateTime(timeText); }, 1000/fps);
     };
 
     function addEventListener(canvas, shape){
@@ -59,8 +57,7 @@
                 x : e.clientX - canvas.offsetLeft,
                 y : e.clientY - canvas.offsetTop
             };
-            
-            shapeHit(shape, clickPos);
+            shapeHit(shape, clickPos, timeStart);
         });
     };
 
@@ -77,6 +74,7 @@
         }
 
         if(hit == true){
+            resetAndSaveTime();
             console.log(shape.shapeType + " hit!");
         };
         
@@ -84,13 +82,15 @@
     };
 
     function updateTime(element) {
-        //shape.drawShape();
-        //console.log(shape);   
+        var currentTime = new Date().getTime();
+        timer = calculate_time(timeStart, currentTime);
+
+        append_to_innerHTML(element, timer);
     };
 /*
     document.getElementById("interactive-shape").onclick = function(){
         // Get page elements
-        var timeText = document.getElementById("your-time");
+        
         var shape = document.getElementById("interactive-shape");
         var currentColor = shape.style.color;
 
@@ -110,6 +110,15 @@
         timeStart = new Date().getTime();
     };
 */
+
+    // TODO - Have timeRecords trim to best 3
+    function resetAndSaveTime() {
+        timeTaken = calculate_time(timeStart, new Date().getTime());
+        timeRecords.push(timeTaken);
+        console.log("LOG OF TIMES: " + timeRecords);
+        timeStart = new Date().getTime();
+    }
+
     function flip_color(element, color){
         if(element.style.backgroundColor == color){
             element.style.backgroundColor = 'black';
@@ -161,7 +170,7 @@
 
     function calculate_time(startTime, timeClick){
         let ms = 1000;
-        console.log((timeClick - startTime)/ms);
+        //console.log((timeClick - startTime)/ms);
         return ((timeClick - startTime)/ms);
     };
 
