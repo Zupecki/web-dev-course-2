@@ -92,7 +92,7 @@
         }
 
         if(hit == true){
-            resetAndSaveTime();
+            resetTime(true);
             refreshShape();
             console.log(shape.shapeType + " hit!");
         };
@@ -125,30 +125,8 @@
         }
 
         refreshShape();
+        resetTime(false);
     }
-/*
-    document.getElementById("interactive-shape").onclick = function(){
-        // Get page elements
-        
-        var shape = document.getElementById("interactive-shape");
-        var currentColor = shape.style.color;
-
-        // Test color change on click
-        flip_color(shape, 'blue');
-
-        // Get time at click
-        timeClick = new Date().getTime();
-        // Calculate the difference in time from page load
-        var timer = calculate_time(timeStart, timeClick).toFixed(2);
-        console.log("TIMER: "+ timer)
-
-        // Add time taken to timeText element
-        append_to_innerHTML(timeText, timer);
-
-        // Reset the start time
-        timeStart = new Date().getTime();
-    };
-*/
 
     function refreshShape() {
         cxt = canvas.getContext('2d');
@@ -163,10 +141,13 @@
     }
 
     // TODO - Have timeRecords trim to best 3
-    function resetAndSaveTime() {
-        timeTaken = calculate_time(timeStart, new Date().getTime());
-        timeRecords.push(timeTaken);
-        console.log("LOG OF TIMES: " + timeRecords);
+    function resetTime(save) {
+        if(save == true) {
+            timeTaken = calculate_time(timeStart, new Date().getTime());
+            timeRecords.push(timeTaken);
+            console.log("LOG OF TIMES: " + timeRecords);
+        }
+        
         timeStart = new Date().getTime();
     }
 
