@@ -6,6 +6,8 @@
     var timeStart = new Date().getTime();
     var shapeList = [];
     var timeRecords = [];
+    var gameDifficulty = "easy";
+    var respawnTime = 3.0;
 
     class Shape {
         constructor(colour, dimension, position, shapeType) {
@@ -33,6 +35,7 @@
     window.onload = function() {
         let gameWrapper = document.getElementById("game-wrapper");
         let timeText = document.getElementById("your-time");
+        let buttons = document.getElementsByClassName("difficulty-button");
 
         canvas = document.getElementById("canvas");
         canvas.width = 700;
@@ -42,22 +45,37 @@
         cxt.fillStyle = "black";
         cxt.fillRect(0, 0, canvas.width, canvas.height);
 
-        create_shape();
-
-        addEventListener(canvas, shape);
+        addShape(create_shape());
+        addCanvasClickListener(canvas, shape);
+        addButtonClickListener(buttons);
 
         var fps = 30;
         setInterval(function() { updateTime(timeText); }, 1000/fps);
     };
 
-    function addEventListener(canvas, shape){
-        canvas.addEventListener('click', (e) => {
+    function addCanvasClickListener(element, shape){
+        element.addEventListener('click', (e) => {
             const clickPos = {
                 x : e.clientX - canvas.offsetLeft,
                 y : e.clientY - canvas.offsetTop
             };
             shapeHit(clickPos, timeStart);
         });
+    };
+
+    function addButtonClickListener(buttons) {
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', function() {
+                var current = document.getElementsByClassName("selected-button");
+                current[0].className = current[0].className.replace(" selected-button", "");
+                this.className += " selected-button";
+                setDifficulty(this.innerHTML);
+            });
+        }
+    }
+
+    function addShape(shape){
+        shapeList.push(shape);
     };
 
     function shapeHit(clickPos){
@@ -75,7 +93,7 @@
 
         if(hit == true){
             resetAndSaveTime();
-            newShape();
+            refreshShape();
             console.log(shape.shapeType + " hit!");
         };
         
@@ -94,6 +112,20 @@
         timer = calculate_time(timeStart, currentTime);
         append_to_innerHTML(element, timer);
     };
+
+    function setDifficulty(difficulty){
+        if(difficulty.toLowerCase() == "easy") {
+            gameDifficulty = "easy";
+        }
+        else if(difficulty.toLowerCase() == "medium") {
+            gameDifficulty = "medium";
+        }
+        else if(difficulty.toLowerCase() == "hard") {
+            gameDifficulty = "hard";
+        }
+
+        refreshShape();
+    }
 /*
     document.getElementById("interactive-shape").onclick = function(){
         // Get page elements
@@ -118,7 +150,7 @@
     };
 */
 
-    function newShape() {
+    function refreshShape() {
         cxt = canvas.getContext('2d');
         cxt.fillStyle = 'black';
         cxt.fillRect(0, 0, canvas.width, canvas.height);
@@ -127,7 +159,7 @@
         shapeList.splice(0,1);
         
         //create and add new shape
-        create_shape();
+        shapeList.push(create_shape());
     }
 
     // TODO - Have timeRecords trim to best 3
@@ -161,11 +193,22 @@
 
     function create_shape() {
         let colour = getRandomColour();
-        let dimension = random_number(60, canvas.width/3);
+        var dimension = 0.0;
         let shapeType = ""
         // 2 is for px, ensuring at least a margin of 2px on canvas for shapes
         let posMin = 2;
         let posMax = canvas.width - 2;
+
+        // Set min-max dimensions based on difficulty
+        if(gameDifficulty == "easy") {
+            dimension = random_number(120, 240);
+        }
+        else if(gameDifficulty == "medium") {
+            dimension = random_number(60, 120);
+        }
+        else if(gameDifficulty == "hard") {
+            dimension = random_number(10, 40);
+        }
 
         // randomize circle or square based on even or odd number 
         if(random_number(1, 10)%2 == 0){
@@ -184,7 +227,9 @@
         x = random_number(posMin, posMax);
         y = random_number(posMin, posMax);
 
-        shapeList.push(new Shape(colour, dimension, [x, y], shapeType));
+        shape = new Shape(colour, dimension, [x, y], shapeType);
+
+        return shape
     };
 
     function calculate_time(startTime, timeClick){
