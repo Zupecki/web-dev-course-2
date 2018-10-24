@@ -111,17 +111,24 @@
 
         timer = calculate_time(timeStart, currentTime);
         append_to_innerHTML(element, timer);
+
+        updateScores();
     };
 
     function setDifficulty(difficulty){
+        var difficultyText = document.getElementById("difficulty-text");
+
         if(difficulty.toLowerCase() == "easy") {
             gameDifficulty = "easy";
+            difficultyText.innerHTML = "EASY";
         }
         else if(difficulty.toLowerCase() == "medium") {
             gameDifficulty = "medium";
+            difficultyText.innerHTML = "MEDIUM";
         }
         else if(difficulty.toLowerCase() == "hard") {
             gameDifficulty = "hard";
+            difficultyText.innerHTML = "HARD";
         }
 
         refreshShape();
@@ -138,7 +145,20 @@
         
         //create and add new shape
         shapeList.push(create_shape());
-    }
+    };
+
+    function updateScores() {
+        var scoreElements = [];
+        scoreElements.push(document.getElementById("score-1st"));
+        scoreElements.push(document.getElementById("score-2nd"));
+        scoreElements.push(document.getElementById("score-3rd"));
+
+        for(var i = 0; i < scoreElements.length; i++ ) {
+            scoreElements[i].innerHTML = timeRecords[i];
+        }
+
+        console.log("LENGTH OF RECORD TIMES: " + timeRecords.length)
+    };
 
     // TODO - Have timeRecords trim to best 3
     function resetTime(save) {
@@ -147,9 +167,12 @@
             timeRecords.push(timeTaken);
             console.log("LOG OF TIMES: " + timeRecords);
         }
+
+        timeRecords.sort();
+        timeRecords.splice(3, 3);
         
         timeStart = new Date().getTime();
-    }
+    };
 
     function flip_color(element, color){
         if(element.style.backgroundColor == color){
