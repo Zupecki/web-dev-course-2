@@ -196,7 +196,7 @@
     };
 
     function append_to_innerHTML(element, append){
-        element.innerHTML = "Your time: " + append + "s";
+        element.innerHTML = "Timer: " + append + "s";
     };
 
     function random_number(min, max){
