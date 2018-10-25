@@ -92,7 +92,7 @@
         }
 
         if(hit == true){
-            resetTime(true);
+            updateGame(true);
             refreshShape();
             console.log(shape.shapeType + " hit!");
         };
@@ -132,7 +132,7 @@
         }
 
         refreshShape();
-        resetTime(false);
+        updateGame(false);
     }
 
     function refreshShape() {
@@ -153,17 +153,7 @@
         scoreElements.push(document.getElementById("score-1st"));
         scoreElements.push(document.getElementById("score-2nd"));
         scoreElements.push(document.getElementById("score-3rd"));
-/*
-        if(difficulty == "easy") {
-            table = 0;
-        }
-        else if(difficulty == "medium") {
-            table = 1;
-        }
-        else if(difficulty == "hard") {
-            table = 2;
-        }
-*/
+
         for(var i = 0; i < scoreElements.length; i++ ) {
             scoreElements[i].innerHTML = timeRecords[gameDifficulty][i];
         }
@@ -171,16 +161,13 @@
         console.log("LENGTH OF RECORD TIMES: " + timeRecords.length)
     };
 
-    // TODO - Have timeRecords trim to best 3
-    function resetTime(save) {
-        if(save == true) {
+    // reset time, update scores
+    function updateGame(saveTime) {
+        if(saveTime == true) {
             timeTaken = calculate_time(timeStart, new Date().getTime());
-            console.log("TIME TAKEN: " + timeTaken);
-
             timeRecords[gameDifficulty].push(timeTaken);
 
-          
-            
+            console.log("TIME TAKEN: " + timeTaken);
             console.log("LOG OF TIMES:")
             console.log("EASY: " + timeRecords["easy"]);
             console.log("MEDIUM: " + timeRecords["medium"]);
