@@ -5,7 +5,7 @@
     var timeTaken = 0.0;
     var timeStart = new Date().getTime();
     var shapeList = [];
-    var timeRecords = [];
+    var timeRecords = {"easy" : [], "medium" : [], "hard" : []};
     var gameDifficulty = "easy";
     var respawnTime = 3.0;
 
@@ -112,7 +112,7 @@
         timer = calculate_time(timeStart, currentTime);
         append_to_innerHTML(element, timer);
 
-        updateScores();
+        
     };
 
     function setDifficulty(difficulty){
@@ -148,13 +148,24 @@
     };
 
     function updateScores() {
+        var table = 0;
         var scoreElements = [];
         scoreElements.push(document.getElementById("score-1st"));
         scoreElements.push(document.getElementById("score-2nd"));
         scoreElements.push(document.getElementById("score-3rd"));
-
+/*
+        if(difficulty == "easy") {
+            table = 0;
+        }
+        else if(difficulty == "medium") {
+            table = 1;
+        }
+        else if(difficulty == "hard") {
+            table = 2;
+        }
+*/
         for(var i = 0; i < scoreElements.length; i++ ) {
-            scoreElements[i].innerHTML = timeRecords[i];
+            scoreElements[i].innerHTML = timeRecords[gameDifficulty][i];
         }
 
         console.log("LENGTH OF RECORD TIMES: " + timeRecords.length)
@@ -164,12 +175,22 @@
     function resetTime(save) {
         if(save == true) {
             timeTaken = calculate_time(timeStart, new Date().getTime());
-            timeRecords.push(timeTaken);
-            console.log("LOG OF TIMES: " + timeRecords);
+            console.log("TIME TAKEN: " + timeTaken);
+
+            timeRecords[gameDifficulty].push(timeTaken);
+
+          
+            
+            console.log("LOG OF TIMES:")
+            console.log("EASY: " + timeRecords["easy"]);
+            console.log("MEDIUM: " + timeRecords["medium"]);
+            console.log("HARD: " + timeRecords["hard"]);
         }
 
-        timeRecords.sort();
-        timeRecords.splice(3, 3);
+        timeRecords[gameDifficulty].sort();
+        timeRecords[gameDifficulty].splice(3, 3);
+
+        updateScores();
         
         timeStart = new Date().getTime();
     };
