@@ -6,8 +6,10 @@
     var timeStart = new Date().getTime();
     var shapeList = [];
     var timeRecords = {"easy" : [], "medium" : [], "hard" : []};
-    var gameDifficulty = "easy";
+    var gameDifficulty = "medium";
     var respawnTime = 3.0;
+
+
 
     class Shape {
         constructor(colour, dimension, position, shapeType) {
@@ -34,7 +36,7 @@
 
     window.onload = function() {
         let gameWrapper = document.getElementById("game-wrapper");
-        let timeText = document.getElementById("your-time");
+        let timeText = ""//document.getElementById("your-time");
         let buttons = document.getElementsByClassName("difficulty-button");
 
         canvas = document.getElementById("canvas");
@@ -45,15 +47,25 @@
         cxt.fillStyle = "black";
         cxt.fillRect(0, 0, canvas.width, canvas.height);
 
-        addShape(create_shape());
-        addCanvasClickListener(canvas, shape);
-        addButtonClickListener(buttons);
+        addShape(create_shape("#00ff00", "circle"));
+        addShape(create_shape("#ff0000", "square"));
+        addShape(create_shape("#ff0000", "square"));
+
+        addCanvasClickListener(canvas);
+        //addButtonClickListener(buttons);
 
         var fps = 30;
         setInterval(function() { updateTime(timeText); }, 1000/fps);
+
+        if(typeof jQuery != "undefined") {
+                console.log("JQUERY PRESENT!");
+            }
+            else {
+                console.log("JQUERY NOT PRESENT!");
+            }
     };
 
-    function addCanvasClickListener(element, shape){
+    function addCanvasClickListener(element){
         element.addEventListener('click', (e) => {
             const clickPos = {
                 x : e.clientX - canvas.offsetLeft,
@@ -81,21 +93,24 @@
     function shapeHit(clickPos){
         hit = false;
         console.log("X: " + clickPos['x'] + "\nY: " + clickPos['y']);
-        shape = shapeList[0];
 
-        if(shape.shapeType == "circle") {
-            hit = Math.sqrt((clickPos['x'] - shape.position['x'])**2 + (clickPos['y'] - shape.position['y']) **2) < shape.dimension/2;
-        }
-        else {
-            hit = (shape.position['x'] <= clickPos['x'] && clickPos['x'] <= shape.position['x'] + shape.dimension) &&
-            (shape.position['y'] <= clickPos['y'] && clickPos['y'] <= shape.position['y'] + shape.dimension);
-        }
+        for (var i = 0; i < shapeList.length; i++) {
+            var shape = shapeList[i];
 
-        if(hit == true){
-            updateGame(true);
-            refreshShape();
-            console.log(shape.shapeType + " hit!");
-        };
+            if(shape.shapeType == "circle") {
+                hit = Math.sqrt((clickPos['x'] - shape.position['x'])**2 + (clickPos['y'] - shape.position['y']) **2) < shape.dimension/2;
+            }
+            else {
+                hit = (shape.position['x'] <= clickPos['x'] && clickPos['x'] <= shape.position['x'] + shape.dimension) &&
+                (shape.position['y'] <= clickPos['y'] && clickPos['y'] <= shape.position['y'] + shape.dimension);
+            }
+            if(hit == true){
+                updateGame(true);
+                refreshShape(i);
+                console.log(shape.shapeType + " hit!");
+            };
+        }
+        
         
         return hit  
     };
@@ -131,16 +146,19 @@
         updateGame(false);
     }
 
-    function refreshShape() {
+    function refreshShape(shape = undefined) {
         cxt = canvas.getContext('2d');
         cxt.fillStyle = 'black';
         cxt.fillRect(0, 0, canvas.width, canvas.height);
 
-        //remove other shape
-        shapeList.splice(0,1);
+        console.log("NUMBER OF SHAPES: " + shapeList.length);
+        //remove shape
+        shapeList.splice([shape],[shape+1]);
         
         //create and add new shape
         shapeList.push(create_shape());
+
+        console.log("NUMBER OF SHAPES: " + shapeList.length);
     };
 
     function updateScores() {
@@ -173,7 +191,7 @@
         timeRecords[gameDifficulty].sort();
         timeRecords[gameDifficulty].splice(3, 3);
 
-        updateScores();
+        //updateScores();
         
         timeStart = new Date().getTime();
     };
@@ -199,8 +217,12 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 
-    function create_shape() {
-        let colour = getRandomColour();
+    function create_shape(colour=undefined, shape=undefined) {
+        var colour = colour;
+        if(colour == undefined){
+            colour = getRandomColour();
+        }
+        
         var dimension = 0.0;
         let shapeType = ""
         // 2 is for px, ensuring at least a margin of 2px on canvas for shapes
@@ -219,18 +241,23 @@
         }
 
         // randomize circle or square based on even or odd number 
-        if(random_number(1, 10)%2 == 0){
-            shapeType = "circle";
-            // edit posMin/posMax to ensure circle is pushed/pulled into canvas by its radius
+        if(shape == undefined) {
+            shapeType = (random_number(1, 10) % 2 == 0 ? "circle" : "square");
+        }
+        else {
+            shapeType = shape;
+        }
+
+        // edit posMin/posMax to ensure circle is pushed/pulled into canvas by its radius
+        if(shapeType == "circle") {
             posMin += dimension/2;
             posMax -= dimension/2;
         }
-        else {
-            shapeType = "square";
+        else if (shapeType == "square") {
             // edit max pos to pull shape back in by width/height
             posMax -= dimension;
         }
-
+        
         // get random position values for shape
         x = random_number(posMin, posMax);
         y = random_number(posMin, posMax);

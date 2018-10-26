@@ -1,0 +1,22 @@
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: green;
+}
+
+.shape {
+	width: 160px;
+	height: 160px;
+	margin: 4px;
+	float: left;
+}
+
+.circle {
+	border-radius: 80px;
+}
+
+.square {
+	
+}
