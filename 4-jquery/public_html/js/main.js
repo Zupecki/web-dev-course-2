@@ -2,7 +2,8 @@ $(".shape").click(function () {
     //printAttributes($(this));
     //hideShape($(this));
     changeText($('#text-1'));
-    changeSrc($('.iframe'));
+    //changeSrc($('.iframe'));
+    changeColor($(this), true);
 });
 
 $(".shape").hover(function () {
@@ -39,8 +40,12 @@ function printAttributes(element) {
     console.log(element.attr("class"));
 }
 
-function changeColor(element) {
+function changeColor(element, background=false) {
     color = getRandomColour();
+
+    if(background == true) {
+        element.css("background-color", color);
+    }
 
     element.css("color", color);
 }
