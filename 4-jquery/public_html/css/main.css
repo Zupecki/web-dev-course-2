@@ -12,7 +12,7 @@
 }
 
 #button-1 {
-	
+	float: right;
 }
 
 .iframe {
@@ -25,6 +25,8 @@
 	height: 160px;
 	margin: 4px;
 	float: left;
+	top: 0px;
+	left: 0px;
 }
 
 .circle {

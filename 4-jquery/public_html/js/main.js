@@ -6,6 +6,7 @@ window.onload = function () {
         toggleText($('#text-1'), ["CHANGED TEXT!", "OTHER TEXT!"]);
         //changeSrc($('.iframe'));
         //fade($(".shape"), "out");
+        move($(this), 1000);
     });
 
     //click button-1 id
@@ -38,7 +39,45 @@ function fade(element, direction, duration) {
             toggleText($("#button-1"), ["SEND SHAPES AWAY", "BRING SHAPES BACK"]);
         });
     }
-    
+};
+
+function move(element, duration) {
+    let grow = 0;
+    let movePos = "0px";
+
+    var animProps = {
+        top:"1000px",
+        left:"500px",
+        width:element.css("width"),
+        height:element.css("height")
+    };
+
+    element.css("position","absolute");
+    console.log("WIDTHx2: "+parseInt(element.css("width"))*2);
+
+    if(element.css("top") == "1000px") {
+        movePos = "0px";
+        grow = String(parseInt(element.css("width"))/2)+"px";
+    }
+    if(element.css("top") == "0px"){
+        movePos = "1000px";
+        grow = String(parseInt(element.css("width"))*2)+"px";
+    }
+
+    console.log("GROW: "+grow);
+
+    //update values
+    animProps["top"] = movePos;
+    animProps["left"] = movePos;
+    animProps["width"] = grow;
+    animProps["height"] = grow;
+
+    element.animate(animProps, duration, function (){
+        //if shape has returned to start pos, set back to relative
+        if(element.css("top") == "0px") {
+            element.css("position","relative");
+        } 
+    });
 };
 
 function fadeIn(element) {
