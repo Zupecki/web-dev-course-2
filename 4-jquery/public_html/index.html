@@ -13,8 +13,17 @@
 	</head>
 
 	<body>
-
-        <div><button id="button-1">SEND SHAPES AWAY</button></div>
+        <div id="controls">
+            <button id="button-1">SEND SHAPES AWAY</button>
+            <div id="coord-inputs">
+                <p><strong>Animation controls</strong></p>
+                <p>Set coordinates for shape, then click shape!</p>
+                X: <input type="text" id="x-input" value="500"></br>
+                Y: <input type="text" id="y-input" value="200"></br>
+                Time: <input type="text" id="time-input" value="1000">
+                <p>Click shape to send back again</p>
+            </div>
+        </div>
 
         <!--
         <div id="text">
@@ -22,6 +31,7 @@
         </div>
         -->
         
+
         <div id="shapes">
             <div class="green circle shape" id="circle-1"></div>
             <div class="red square shape" id="square-1"></div>
