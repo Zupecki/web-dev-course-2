@@ -44,6 +44,7 @@ class Shape {
     }
 
     moveTo(x, y) {
+        this.element.stop();
         move(this, [x, y]);
     }
 
@@ -151,10 +152,13 @@ function move(object, moveTo) {
     }
 
     //animate based on decided qualities
-    element.animate(animProps, duration, function (){
-        //set currentPos to position moved to
-        object.setCurrentPos(animProps);
-        console.log("ANIMATION CALLBACK");
+    element.animate(animProps, {
+        duration,
+        step: function (){
+            //set currentPos to position moved to
+            object.setCurrentPos(animProps);
+            console.log("ANIMATION CALLBACK");
+        }
     });
 };
 
