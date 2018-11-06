@@ -1,24 +1,24 @@
 .arial {
-	font-family:Arial, Helvetica, sans-serif;
+	
 }
 
-#label-email-input {
+.input-label {
 	font-size: 30px;
 	vertical-align: middle;
 	color: white;
+	font-family:Arial, Helvetica, sans-serif;
 }
 
-#input-email {
+#input-email, #input-pass {
 	height: 40px;
 	width: 300px;
 	padding: 10px;
 	margin-left: 10px;
 }
 
-#get-email {
+#get-email, #get-pass {
 	display: inline-block;
-	
-	margin: auto;
+	margin: 10px;
 }
 
 #login-form {
